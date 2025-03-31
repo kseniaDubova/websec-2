@@ -1,24 +1,22 @@
 import { useState } from "react";
 
 function StationSelector({ stations, onSelect }) {
-  const [search, setSearch] = useState(""); // Поле поиска
-  const [isInputFocused, setIsInputFocused] = useState(false); // Фокус инпута
+  const [search, setSearch] = useState("");
+  const [isInputFocused, setIsInputFocused] = useState(false);
 
-  // Фильтрация станций
   const filteredStations = search.trim()
     ? stations.filter((station) =>
         station.title.toLowerCase().includes(search.trim().toLowerCase())
       )
     : stations;
 
-  // Выбор станции
+
   const handleSelectStation = (station) => {
-    setSearch(station.title); // Заполняем инпут названием
-    setIsInputFocused(false); // Закрываем список
-    onSelect(station); // Передаем выбранную станцию в родительский компонент
+    setSearch(station.title); 
+    setIsInputFocused(false); 
+    onSelect(station); 
   };
 
-  // Закрываем список с задержкой (чтобы можно было выбрать станцию)
   const handleBlur = () => {
     setTimeout(() => {
       setIsInputFocused(false);
